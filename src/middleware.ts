@@ -7,7 +7,7 @@ export async function middleware(req: NextRequest) {
   const isPathProtected = protectedPaths?.some((path) => pathname == path);
   const res = NextResponse.next();
   if (isPathProtected) {
-    const url = new URL(`/dashboard`, req.url);
+    const url = new URL(`/employee`, req.url);
     return NextResponse.redirect(url);
   }
   return res;
