@@ -9,8 +9,10 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import { Fragment, useState } from 'react';
+import * as Fi from 'react-icons/fi';
 
-import { TableBody, TableHead } from '@/components/molecules';
+import { Pagination, TableBody, TableHead } from '@/components/molecules';
+import Skeleton from 'react-loading-skeleton';
 
 export interface ReactTableProps<TData> {
   route?: string;
@@ -20,6 +22,7 @@ export interface ReactTableProps<TData> {
   columns: ColumnDef<TData, any>[];
   renderSubComponent?: (props: { row: Row<TData> }) => React.ReactElement;
   getRowCanExpand: (row: Row<TData>) => boolean;
+  isLoading: boolean;
 }
 
 const Table = <TData extends object>({
@@ -27,6 +30,7 @@ const Table = <TData extends object>({
   columns,
   renderSubComponent,
   getRowCanExpand,
+  isLoading,
 }: ReactTableProps<TData>) => {
   const [sorting, setSorting] = useState<SortingState>([]);
 
@@ -49,12 +53,35 @@ const Table = <TData extends object>({
     <Fragment>
       <table className="w-full">
         <TableHead table={table} />
-        {renderSubComponent ? (
-          <TableBody table={table} renderSubComponent={renderSubComponent} />
+        {renderSubComponent && !isLoading && data.length > 0 ? (
+          <TableBody
+            table={table}
+            renderSubComponent={renderSubComponent}
+            isLoading={isLoading}
+          />
         ) : (
-          <TableBody table={table} />
+          <TableBody table={table} isLoading={isLoading} />
         )}
       </table>
+      {!isLoading && data.length > 0 ? <Pagination table={table} /> : null}
+
+      {isLoading ? (
+        Array(10)
+          .fill('')
+          .map((item, index) => (
+            <div
+              key={index}
+              className="border-t border-b border-grayModern-300 text-left font-semibold"
+            >
+              <Skeleton className="my-1" height={20} />
+            </div>
+          ))
+      ) : data.length === 0 ? (
+        <div className="flex flex-col items-center justify-center min-h-[30vh] border-b">
+          <Fi.FiFileText className="text-gray-500" size={28} />
+          <h4 className="mt-4 text-gray-500">Data not found</h4>
+        </div>
+      ) : null}
     </Fragment>
   );
 };

@@ -13,7 +13,11 @@ export const columnListEmployee: ColumnDef<IEmployee>[] = [
             style: { cursor: 'pointer' },
           }}
         >
-          {row.getIsExpanded() ? <Fi.FiChevronUp /> : <Fi.FiChevronDown />}
+          {row.getIsExpanded() ? (
+            <Fi.FiChevronUp className="text-sky-600" />
+          ) : (
+            <Fi.FiChevronDown className="text-sky-600" />
+          )}
         </button>
       ) : null;
     },
@@ -30,7 +34,13 @@ export const columnListEmployee: ColumnDef<IEmployee>[] = [
     accessorKey: 'id',
     header: 'Action',
     cell: (props) => {
-      return <div className="relative"></div>;
+      return (
+        <div className="relative flex">
+          <Fi.FiEye className="mr-3 cursor-pointer" />
+          <Fi.FiEdit className="mr-3 cursor-pointer" />
+          <Fi.FiTrash className="cursor-pointer" />
+        </div>
+      );
     },
   },
 ];

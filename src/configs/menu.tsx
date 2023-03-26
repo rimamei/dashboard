@@ -4,7 +4,7 @@ export const Menu = [
   {
     title: 'Dashboard',
     icon: <Fi.FiHome />,
-    link: '/dashboard',
+    link: '/404',
   },
   {
     title: 'Employee',

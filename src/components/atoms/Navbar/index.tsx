@@ -6,10 +6,10 @@ const Header = () => {
   return (
     <header className="top-0 z-30 bg-white flex">
       <div className="flex items-center w-[100px] md:w-[350px] justify-center">
-        <div className="p-2 bg-emerald-700 rounded-md mr-2">
+        <div className="p-2 bg-sky-600 rounded-md mr-2">
           <Fi.FiCloud className="text-white text-xs md:text-lg" />
         </div>
-        <h1 className="text-emerald-700">HR</h1>
+        <h1 className="text-sky-600">HR</h1>
       </div>
       <nav className="pr-4 md:pr-8 py-4 border-b border-gray-200 flex justify-between w-full">
         <div className="w-[200px] md:w-[300px]">

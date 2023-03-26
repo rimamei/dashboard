@@ -13,21 +13,28 @@ const TableHead = ({ table }: TableHeadProps) => {
         return (
           <tr
             key={headerGroup.id}
-            className="border-t border-b border-grayModern-300 text-left font-semibold"
+            className="bg-gray-50 border-t border-b border-grayModern-300 text-left font-semibold"
           >
             {headerGroup.headers.map((header) => {
               return (
-                <th key={header.id}>
+                <th
+                  key={header.id}
+                  className={`${
+                    header.id === 'expander' ? 'bg-gray-100 w-5' : ''
+                  }`}
+                >
                   {header.isPlaceholder ? null : (
                     <div
                       {...{
-                        className: `captionLarge py-2 text-grayModern-700 flex items-center ${
+                        className: `p-2 text-gray-700 flex items-center ${
                           header.column.getCanSort()
                             ? 'cursor-pointer select-none'
                             : ''
                         }  ${header.id === 'id' ? 'text-right' : ''} ${
-                          header.id === 'expander' || header.id === 'id'
-                            ? 'w-12'
+                          header.id === 'expander'
+                            ? 'w-10 bg-gray-100'
+                            : header.id === 'id'
+                            ? 'w-10'
                             : 'min-w-[150px]'
                         }`,
                         onClick: header.column.getToggleSortingHandler(),

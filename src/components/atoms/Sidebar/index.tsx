@@ -35,7 +35,7 @@ const Sidebar = () => {
           <li
             className={`cursor-pointer p-2 mb-4 md:mb-2 md:px-4 md:py-3 rounded-full flex items-center ${
               active === item.title
-                ? 'bg-emerald-700 text-white'
+                ? 'bg-sky-600 text-white'
                 : 'text-gray-700 hover:bg-gray-100'
             }`}
             key={index}
